@@ -1,6 +1,9 @@
 package ru.netology.web.test;
 
+<<<<<<< HEAD
 import org.junit.jupiter.api.BeforeEach;
+=======
+>>>>>>> f4ed02fc0a7e484ca33bb8d0d57742f26cf986f3
 import org.junit.jupiter.api.Test;
 import ru.netology.web.data.DataHelper;
 import ru.netology.web.page.DashboardPage;
