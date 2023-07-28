@@ -1,28 +1,23 @@
 package ru.netology.web.page;
 
-import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
+import org.openqa.selenium.support.FindBy;
 import ru.netology.web.data.DataHelper;
 
-import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.page;
 
 public class LoginPage {
-  public VerificationPage validLogin(DataHelper.AuthInfo info) {
-    fillLogin(info);
+  @FindBy(css = "[data-test-id= 'login'] input")
+  private static SelenideElement loginField;
+  @FindBy(css = "[data-test-id= 'password'] input")
+  private static SelenideElement passwordField;
+  @FindBy(css = "[data-test-id= 'action-login']")
+  private static SelenideElement loginButton;
 
-    return new VerificationPage();
-  }
-
-  public LoginPage invalidLogin(DataHelper.AuthInfo info) {
-    fillLogin(info);
-
-    $(".notification").shouldBe(Condition.visible);
-
-    return this;
-  }
-
-  public void fillLogin(DataHelper.AuthInfo info) {
-    $("[data-test-id= 'login'] input").setValue(info.getLogin());
-    $("[data-test-id= 'password'] input").setValue(info.getPassword());
-    $("[data-test-id= 'action-login']").click();
+  public VerificationPage validLogin(DataHelper.AuthInfo info){
+    loginField.setValue(info.getLogin());
+    passwordField.setValue(info.getPassword());
+    loginButton.click();
+    return page(VerificationPage.class);
   }
 }
